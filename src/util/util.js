@@ -1,3 +1,8 @@
+/**
+ * @description this function persist local state data on the localstorage
+ * @param {data to persist on localstore} param0
+ * @returns
+ */
 export const addFav = ({ sprites, name, height, weight }) => {
   const oldItems = JSON.parse(localStorage.getItem("favorites")) || []
   const newItems = {
@@ -16,6 +21,11 @@ export const addFav = ({ sprites, name, height, weight }) => {
   }
 }
 
+/**
+ * @description this function removes local state data on the localstorage
+ * @param {nameof object to remove on localstore} param0
+ * @returns
+ */
 export const removeFav = ({ name }) => {
   let oldItems = JSON.parse(localStorage.getItem("favorites")) || []
   const newitems = Object.values(oldItems)

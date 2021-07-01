@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
+/**
+ * @param no params required to use this component
+ * @returns JSX react component
+ */
 const Header = () => {
   return (
     <Wrapper>

@@ -16,11 +16,11 @@ const Favorites = () => {
   return (
     <div style={{ marginTop: "100px" }}>
       {data.map((d) => (
-        <ContentWrapper>
-          <Wrapper>
-            <Link to={`/pokemon/${d.name}`}>
-              <TextWrapper>
-                <Title>{d.name}</Title>
+        <ContentWrapper key={d.sprites.back_default}>
+          <Wrapper key={d.index}>
+            <Link key={d.index} to={`/pokemon/${d.name}`}>
+              <TextWrapper key={d.index}>
+                <Title key={d.index}>{d.name}</Title>
               </TextWrapper>
             </Link>
             <button onClick={() => removeFavHandler()}>RemoveFave</button>

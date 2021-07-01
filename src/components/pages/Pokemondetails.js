@@ -19,11 +19,19 @@ const Pokemondetails = ({ match }) => {
     setPokemonDetails(details.data)
     setLoading(false)
   }
-
+  /**
+   *
+   * @param {} id
+   * @returns returns a response object from the api call
+   */
   const getPokemonData = async (id) => {
-    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
-    localStorage.setItem("pokemon-details-url", JSON.stringify(res))
-    return res
+    try {
+      const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+      localStorage.setItem("pokemon-details-url", JSON.stringify(res))
+      return res
+    } catch (error) {
+      alert(error.message)
+    }
   }
   const handleAddFavorite = () => {
     addFav(pokemonDetails)
@@ -33,6 +41,14 @@ const Pokemondetails = ({ match }) => {
     removeFav(pokemonDetails)
   }
 
+  /**
+   * @description this function adds the user comment to the localstorage
+   * @param {*} name
+   * @param {*} number
+   * @param {*} message
+   * @param {*} date
+   *
+   */
   const addItem = (name, number, message, date) => {
     const oldItems = JSON.parse(localStorage.getItem("pokemon")) || []
     const newItems = {
@@ -48,7 +64,7 @@ const Pokemondetails = ({ match }) => {
   useEffect(() => {
     const details = JSON.parse(localStorage.getItem("pokemon-details-url"))
     async function getCache() {
-      if (data) {
+      if (details) {
         await setPokemonDetails(details.data)
         setLoading(false)
         return
@@ -56,8 +72,12 @@ const Pokemondetails = ({ match }) => {
     }
     getCache()
     getPokemon(id)
-  }, [id])
-  let data = []
+  }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  /**
+   * @description handles submit events from the comment from,
+   * @description and handles the data to show the comments on the screen
+   */
   const handler = async () => {
     const today = new Date()
     const date = `${today.getDate()}/${
@@ -99,16 +119,20 @@ const Pokemondetails = ({ match }) => {
             </TextWrapper>
             <TextWrapper>
               {pokemonDetails.stats.map((pokemon) => (
-                <div key={pokemon.stat.name}>
-                  <Title>Name: {pokemon.stat.name}</Title>
-                  <Title>Stat: {pokemon.base_stat}</Title>
+                <div key={pokemon.name}>
+                  <Title key={pokemon.stat.name}>
+                    Name: {pokemon.stat.name}
+                  </Title>
+                  <Title key={pokemon.base_stat}>
+                    Stat: {pokemon.base_stat}
+                  </Title>
                 </div>
               ))}
             </TextWrapper>
             <TextWrapper>
               {pokemonDetails.moves.slice(0, 3).map((pokemon) => (
                 <>
-                  <Title key={pokemon.id}>
+                  <Title key={pokemon.move.name}>
                     Name Of Move: {pokemon.move.name}
                   </Title>
                 </>
@@ -126,22 +150,25 @@ const Pokemondetails = ({ match }) => {
       {comments.length !== 0 && (
         <CommentSection>
           {comments.map((comment) => (
-            <div>
-              <p>
+            <div key={comment.name}>
+              <p key={comment.name}>
                 <strong>name</strong>: {comment.name}
               </p>
-              <p>
+              <p key={comment.name}>
                 {" "}
-                <strong>number: </strong>
+                <strong key={comment.name}>number: </strong>
                 {comment.number}
               </p>
-              <p>
+              <p key={comment.name}>
                 {" "}
-                <strong>message: </strong>
+                <strong key={comment.name}>message: </strong>
                 {comment.message}
               </p>
-              <strong>{comment.date}</strong>
-              <div style={{ height: "5px", background: "#333" }} />
+              <strong key={comment.name}>{comment.date}</strong>
+              <div
+                key={comment.name}
+                style={{ height: "5px", background: "#333" }}
+              />
             </div>
           ))}
         </CommentSection>
