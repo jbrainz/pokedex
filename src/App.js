@@ -4,6 +4,10 @@ import Favorites from "./components/pages/Favorites"
 import Pokemon from "./components/pages/PokemonIndex"
 import Pokemondetails from "./components/pages/Pokemondetails"
 
+/**
+ * @description the main application rapper
+ * @returns JSX
+ */
 const App = () => {
   return (
     <BrowserRouter>
