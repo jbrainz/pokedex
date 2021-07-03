@@ -116,9 +116,9 @@ const Pokemon = ({ history }) => {
       ) : (
         <>
           <Wrapper>
-            {pokeman.map((poke) => (
+            {pokeman.map((poke, id) => (
               <HomeSection
-                key={poke.id}
+                key={id}
                 Remove={() => removeFavHandler()}
                 Add={() => addFavoriteHandler()}
                 id={poke.id}

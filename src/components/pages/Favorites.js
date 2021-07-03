@@ -14,19 +14,28 @@ const Favorites = () => {
   }
 
   return (
-    <div style={{ marginTop: "100px" }}>
-      {data.map((d) => (
-        <ContentWrapper key={d.sprites.back_default}>
-          <Wrapper key={d.index}>
-            <Link key={d.index} to={`/pokemon/${d.name}`}>
-              <TextWrapper key={d.index}>
-                <Title key={d.index}>{d.name}</Title>
-              </TextWrapper>
-            </Link>
-            <button onClick={() => removeFavHandler()}>RemoveFave</button>
-          </Wrapper>
-        </ContentWrapper>
-      ))}
+    <div
+      style={{ marginTop: "150px", display: "flex", justifyContent: "center" }}
+    >
+      {data.length === 0 ? (
+        <h1>No Favorites to show</h1>
+      ) : (
+        <div>
+          {data &&
+            data.map((d, index) => (
+              <ContentWrapper key={index}>
+                <Wrapper key={d.index}>
+                  <Link key={d.index} to={`/pokemon/${d.name}`}>
+                    <TextWrapper key={d.index}>
+                      <Title key={d.index}>{d.name}</Title>
+                    </TextWrapper>
+                  </Link>
+                  <button onClick={() => removeFavHandler()}>RemoveFave</button>
+                </Wrapper>
+              </ContentWrapper>
+            ))}
+        </div>
+      )}
     </div>
   )
 }

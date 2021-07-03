@@ -9,19 +9,37 @@ const Header = () => {
   return (
     <Wrapper>
       <MenuWrapper>
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <h1>Pokedex</h1>
+        <Link
+          to="/"
+          style={{
+            textDecoration: "none",
+            color: "white",
+            fontSize: "20px",
+            fontWeight: "bold",
+          }}
+        >
+          <p>Pokedex</p>
         </Link>
-        <Link to="/favorites" style={{ textDecoration: "none" }}>
-          <h1>Favorites</h1>
+        <Link
+          to="/favorites"
+          style={{
+            textDecoration: "none",
+            color: "white",
+            fontSize: "20px",
+            fontWeight: "bold",
+          }}
+        >
+          <p>Favorites</p>
         </Link>
       </MenuWrapper>
     </Wrapper>
   )
 }
 const Wrapper = styled.div`
-  position: absolute;
-  top: 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: black;
   display: grid;
   grid-template-columns: 44px auto;
   justify-content: space-between;

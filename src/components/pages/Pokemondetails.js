@@ -99,16 +99,15 @@ const Pokemondetails = ({ match }) => {
     <Main>
       <Container>
         {loading ? (
-          <h1>Loadin...</h1>
+          <h1>Loading...</h1>
         ) : (
           <>
             <TextWrapper>
               <ImageHolder>
                 <img
                   src={
-                    !loading
-                      ? pokemonDetails.sprites.back_default
-                      : "/images/placecholder.jpg"
+                    pokemonDetails.sprites.back_default ||
+                    "/images/placecholder.jpg"
                   }
                   alt={pokemonDetails.name}
                 />
@@ -118,24 +117,18 @@ const Pokemondetails = ({ match }) => {
               <Title>Height: {pokemonDetails.height}</Title>
             </TextWrapper>
             <TextWrapper>
-              {pokemonDetails.stats.map((pokemon) => (
-                <div key={pokemon.name}>
-                  <Title key={pokemon.stat.name}>
-                    Name: {pokemon.stat.name}
-                  </Title>
-                  <Title key={pokemon.base_stat}>
-                    Stat: {pokemon.base_stat}
-                  </Title>
+              {pokemonDetails.stats.map((pokemon, index) => (
+                <div key={index}>
+                  <Title>Name: {pokemon.stat.name}</Title>
+                  <Title>Stat: {pokemon.base_stat}</Title>
                 </div>
               ))}
             </TextWrapper>
             <TextWrapper>
               {pokemonDetails.moves.slice(0, 3).map((pokemon) => (
-                <>
-                  <Title key={pokemon.move.name}>
-                    Name Of Move: {pokemon.move.name}
-                  </Title>
-                </>
+                <Title key={pokemon.move.name}>
+                  Name Of Move: {pokemon.move.name}
+                </Title>
               ))}
             </TextWrapper>
           </>
@@ -149,26 +142,23 @@ const Pokemondetails = ({ match }) => {
       </ButtonWrapper>
       {comments.length !== 0 && (
         <CommentSection>
-          {comments.map((comment) => (
-            <div key={comment.name}>
-              <p key={comment.name}>
+          {comments.map((comment, index) => (
+            <div key={index}>
+              <p>
                 <strong>name</strong>: {comment.name}
               </p>
-              <p key={comment.name}>
+              <p>
                 {" "}
-                <strong key={comment.name}>number: </strong>
+                <strong>number: </strong>
                 {comment.number}
               </p>
-              <p key={comment.name}>
+              <p>
                 {" "}
-                <strong key={comment.name}>message: </strong>
+                <strong>message: </strong>
                 {comment.message}
               </p>
-              <strong key={comment.name}>{comment.date}</strong>
-              <div
-                key={comment.name}
-                style={{ height: "5px", background: "#333" }}
-              />
+              <strong>{comment.date}</strong>
+              <div style={{ height: "5px", background: "#333" }} />
             </div>
           ))}
         </CommentSection>
